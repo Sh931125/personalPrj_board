@@ -23,12 +23,17 @@
  <tbody>
     <tr th:each="data : ${articlesData}">
        <td th:text="${data.artHits}"></td>
-       <td th:text="${data.artId}"></td>
-       <td th:text="${data.artHead}"></td>
+       <td><span th:text="${data.artId}"></span></td>
+        <td><button th:text="${data.artHead}" class="artHead" th:value="${data.artId}"></button></td>
        <td th:text="${data.artDate}"></td>
     </tr>
  </tbody>
 </table>
 <button type="submit" onclick="insertArtBtn()">글작성</button>
+<p></p>
+<hr>
+<div id="firstDiv">
+
+</div>
 </body>
 </html>

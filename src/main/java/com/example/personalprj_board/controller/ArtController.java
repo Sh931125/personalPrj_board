@@ -15,12 +15,17 @@ import java.util.List;
 public class ArtController {
     @Autowired
     ArticlesJpa articlesJpa;
-
+//메인 뷰
     @GetMapping("/")
     public String root(){
         return "redirect:/main";
     }
-
+//글 작성 뷰
+    @GetMapping("/create")
+    public String createRoot(){
+        return "/articles_create";
+    }
+//메인 뷰 + 게시물 목록
     @GetMapping("/main")
     public String mainRoot(Model model){
         List<Articles> artData = articlesJpa.findAll();
@@ -28,16 +33,18 @@ public class ArtController {
         return "/articles_main";
     }
 
-    @GetMapping("/create")
-    public String createRoot(){
-        return "/articles_create";
-    }
 
+//글 작성 기능
     @PostMapping("/insertArt")
     public String insertRoot(Articles articles){
-        System.out.println(articles);
         articlesJpa.save(articles);
         return"/articles_main";
     }
+
+    @PostMapping("selectArt")
+    public void selectRoot(Articles articles){
+        articlesJpa.findById(articles.getArtId());
+    }
+
 
 }

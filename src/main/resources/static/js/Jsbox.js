@@ -5,6 +5,7 @@ let attrDate = today.getDate();  // 날짜
 let attrResDate = (attrYear + '-' + attrMonth + '-' + attrDate);
 
 
+
 //뷰 전환, 메인
 function articlesMain(){
     window.location.href='/';
@@ -40,5 +41,27 @@ function insertArtAjax () {
         console.log("에러");
         }
 
-    })
+    });
 }
+
+$(document).ready(function () {
+    //글조회 ajax
+    $('.artHead').on("click", function artHeadBtn() {
+
+        let Id = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "/selectArt",
+            data: {
+                artId: Id,
+            },
+            success: function (data) {
+                console.log("성공");
+            },
+            error: function () {
+                console.log("에러");
+            }
+
+        });
+    });
+})
