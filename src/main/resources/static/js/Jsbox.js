@@ -44,21 +44,49 @@ function insertArtAjax () {
     });
 }
 
+function insertComAjax (e) {
+    let comment = $('#commentBody').val();
+    let commentPw = $('#commentPw').val();
+
+    $.ajax({
+        type : "POST",
+        url : "/insertCom",
+        data : {
+          artId : e,
+          comBody : comment,
+          comPw : commentPw,
+        },
+        success : function (data){
+            console.log(data + "성공");
+
+        },
+        error : function (){
+            console.log("에러");
+        }
+    });
+}
+
 $(document).ready(function () {
-    //글조회 ajax
-    $('.artHead').on("click", function artHeadBtn() {
+    //글제목 클릭 ajax
+    $('.artHead').on("click", function () {
 
         let Id = $(this).val();
 
         $.ajax({
-            type: "POST",
-            url: "/selectArt",
-            data: {
+            type : "POST",
+            url : "/selectArt",
+            data : {
                 artId: Id,
             },
             success: function (data) {
                 console.log(data);
                 $('#firstDiv').empty().append(data);
+
+                //댓글 작성 클릭
+                $('#insertComBtn').on("click", function () {
+                    let thisArtId = $(this).val();
+                    insertComAjax(thisArtId);
+                })
 
             },
             error: function () {
@@ -67,4 +95,6 @@ $(document).ready(function () {
 
         });
     });
+
+
 })

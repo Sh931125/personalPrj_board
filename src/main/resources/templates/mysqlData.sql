@@ -12,7 +12,7 @@ art_pw varchar(20) default 1111 not null
 ) engine= InnoDB default character set = utf8mb4;
 
 -- 댓글 테이블 생성
-create table dummy.comments(
+create table dummy.commentsEntity(
 art_id int not null, 
 com_id int auto_increment primary key,
 com_body varchar(2000) not null, 

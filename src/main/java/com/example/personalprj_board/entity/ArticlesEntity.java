@@ -1,15 +1,14 @@
 package com.example.personalprj_board.entity;
 
 import lombok.Data;
+import lombok.Generated;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
 public class ArticlesEntity {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     int artId;
     @Column
     String artHead;
