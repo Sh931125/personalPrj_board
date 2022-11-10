@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div th:each="selectArtRes : ${selectArtRes}">
+    <h1><span th:text="${selectArtRes.artId}"></span><span> 번 째 글입니다.</span></h1>
+    <h2>글 제목 : </h2><span th:text="${selectArtRes.artHead}"></span><br>
+    <h3>글 내용 : </h3><span th:text="${selectArtRes.artBody}"></span>
+</div>
+<div th:if="${selectComRes != null}" th:each="selectComRes : ${selectComRes}">
+    <data>${selectComRes.comId}</data><span th:text="${selectArtRes.comBody}"></span><br>
 
-</body>
-</html>
+</div>
+<hr>
+<span>댓글 작성 : </span><input type="text" id="commentBody" style="width:500px">
+<span>암호 : </span><input type="password" id="commentPw" style="width:90px">
+<button type="submit" id="insertComBtn">작성</button>

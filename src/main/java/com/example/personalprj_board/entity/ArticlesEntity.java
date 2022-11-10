@@ -1,4 +1,4 @@
-package com.example.personalprj_board.dto;
+package com.example.personalprj_board.entity;
 
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class Articles {
+public class ArticlesEntity {
     @Id
     int artId;
     @Column

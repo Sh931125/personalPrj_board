@@ -49,6 +49,7 @@ $(document).ready(function () {
     $('.artHead').on("click", function artHeadBtn() {
 
         let Id = $(this).val();
+
         $.ajax({
             type: "POST",
             url: "/selectArt",
@@ -56,7 +57,9 @@ $(document).ready(function () {
                 artId: Id,
             },
             success: function (data) {
-                console.log("성공");
+                console.log(data);
+                $('#firstDiv').empty().append(data);
+
             },
             error: function () {
                 console.log("에러");
