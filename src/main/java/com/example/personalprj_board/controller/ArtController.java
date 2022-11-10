@@ -50,6 +50,8 @@ public class ArtController {
     //댓글 작성 기능
     @PostMapping("insertCom")
     public String insertComRoot(CommentsEntity commentsEntity){
+        System.out.println(commentsEntity);
+
     //repo 각각 생성 안 했을 때 시도했던 형변환 자료
     //        int Aid = commentsEntity.getArtId().getArtId();
     //        Optional<ArticlesEntity> articlesEntity = articlesRepo.findById(Aid);

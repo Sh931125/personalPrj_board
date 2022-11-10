@@ -4,13 +4,15 @@
     <meta charset="UTF-8" >
     <title> 익명게시판 </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src ="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
+    <script src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
     <script src="/js/Jsbox.js"></script>
 
 </head>
 <body>
-<table id="articlesTable">
+<div id="articlesTableDiv">
+<table id="articlesTable" class="table table-bordered">
  <thead>
   <tr>
        <th>조회수</th>
@@ -28,12 +30,9 @@
     </tr>
  </tbody>
 </table>
+</div>
 <hr>
-
     <button type="submit" onclick="insertArtBtn()">글작성</button>
-
-
-<p></p>
 <hr>
 <!--글 조회 시 표현될 공간입니다.-->
 <div id="firstDiv">

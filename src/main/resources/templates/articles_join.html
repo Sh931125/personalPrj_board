@@ -1,13 +1,13 @@
 <div>
-    <h1><span th:text="${selectArtRes.artId}"></span><span> 번 째 글입니다.</span></h1>
+    <h1><span th:text="${selectArtRes.artId}"></span><span> 번 째 글입니다.</span><button style="margin-left: 10px" onclick="articlesMain()">글 접기</button></h1>
     <h2>글 제목 : </h2><span th:text="${selectArtRes.artHead}"></span><br>
     <h3>글 내용 : </h3><span th:text="${selectArtRes.artBody}"></span>
 </div>
 <div th:if="${selectComRes != null}" th:each="selectComRes : ${selectComRes}">
     <hr>
-    익명 <data th:text="${selectComRes.comId}"></data>&nbsp; : <span th:text="${selectComRes.comBody}"></span><br>
+    익명<data th:text="${selectComRes.comId}" style="display: none"></data>&nbsp; : <span th:text="${selectComRes.comBody}"></span><br>
 </div>
 <hr>
-<span>댓글 작성 : </span><input type="text" id="commentBody" style="width:500px">
-<span>암호 : </span><input type="password" id="commentPw" style="width:90px">
+<span>댓글 작성 : </span><input type="text" id="commentBody" style="width:500px" onkeypress="insertComEnter(event)">
+<span>암호 : </span><input type="password" id="commentPw" style="width:90px" onkeypress="insertComEnter(event)">
 <button type="submit" id="insertComBtn" th:value="${selectArtRes.artId}">작성</button>
