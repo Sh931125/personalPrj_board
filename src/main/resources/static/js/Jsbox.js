@@ -84,6 +84,9 @@ function selectArtAjax(e){
             artId: e,
         },
         success: function (data) {
+            //조회수 즉각반영 위해 추가
+            selectArtAll();
+            //
             $('#firstDiv').empty().append(data);
 
             //댓글 작성 클릭
@@ -98,15 +101,34 @@ function selectArtAjax(e){
         }
     });
 }
+//글목록 조회 ajax
+function selectArtAll () {
+    $.ajax({
+        type : "GET",
+        url : "/selectArtAll",
+        success: function (e) {
+            let html = jQuery('<div>').html(e);
+            let contents = html.find("div#articlesList").html();
+            $('#articlesListDiv').empty().append(contents);
+            //글제목 클릭 이벤트
+            $('.artHead').on("click", function () {
+                let Id = $(this).val();
+                selectArtAjax(Id);
+            });
+        },
+        error() {
+            console.log("error")
+        }
 
-$(document).ready(function () {
-    //dataTable 생성
-    $('#articlesTable').DataTable();
-    //글제목 클릭 ajax
-    $('.artHead').on("click", function () {
-        let Id = $(this).val();
-        selectArtAjax(Id);
     });
 
+}
+
+
+
+$(document).ready(function () {
+    selectArtAll();
+    //dataTable 생성
+    // $('#articlesTable').DataTable();
 
 })

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" >
+    <meta charset="UTF-8">
     <title> 익명게시판 </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
@@ -11,28 +11,10 @@
 
 </head>
 <body>
-<div id="articlesTableDiv">
-<table id="articlesTable" class="table table-bordered">
- <thead>
-  <tr>
-       <th>조회수</th>
-       <th>글 번호</th>
-       <th>글 제목</th>
-       <th>작성 날짜</th>
-  </tr>
- </thead>
- <tbody>
-    <tr th:each="data : ${articlesData}">
-       <td th:text="${data.artHits}"></td>
-       <td><span th:text="${data.artId}" style="background: none; border:none;"></span></td>
-        <td><button th:text="${data.artHead}" class="artHead" th:value="${data.artId}" style="background: none; border:none;"></button></td>
-       <td th:text="${data.artDate}"></td>
-    </tr>
- </tbody>
-</table>
+<div id="articlesListDiv">
 </div>
 <hr>
-    <button type="submit" onclick="insertArtBtn()">글작성</button>
+<button type="submit" onclick="insertArtBtn()">글작성</button>
 <hr>
 <!--글 조회 시 표현될 공간입니다.-->
 <div id="firstDiv">

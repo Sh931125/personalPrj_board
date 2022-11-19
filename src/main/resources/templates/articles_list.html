@@ -1,0 +1,24 @@
+<div id="articlesList">
+<table id="articlesTable" class="table table-bordered">
+    <thead>
+    <tr>
+        <th>조회수</th>
+        <th>글 번호</th>
+        <th>글 제목</th>
+        <th>작성 날짜</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="data : ${articlesData}">
+        <td th:text="${data.artHits}"></td>
+        <td>
+            <span class="dddd" th:text="${data.artId}" style="background: none; border:none;"></span></td>
+        <td>
+            <button th:text="${data.artHead}" class="artHead" th:value="${data.artId}"
+                    style="background: none; border:none;"></button>
+        </td>
+        <td th:text="${data.artDate}"></td>
+    </tr>
+    </tbody>
+</table>
+</div>

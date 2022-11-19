@@ -3,9 +3,11 @@
     <h2>글 제목 : </h2><span th:text="${selectArtRes.artHead}"></span><br>
     <h3>글 내용 : </h3><span th:text="${selectArtRes.artBody}"></span>
 </div>
-<div th:if="${selectComRes != null}" th:each="selectComRes : ${selectComRes}">
+<div th:if="${selectComRes != null}" th:each="selectComRes, selectStat : ${selectComRes}">
     <hr>
-    익명<data th:text="${selectComRes.comId}" style="display: none"></data>&nbsp; : <span th:text="${selectComRes.comBody}"></span><br>
+    익명
+    <span th:text="${selectStat.count}" ></span>
+    &nbsp; : <span th:text="${selectComRes.comBody}"></span><br>
 </div>
 <hr>
 <span>댓글 작성 : </span><input type="text" id="commentBody" style="width:500px" onkeypress="insertComEnter(event)">

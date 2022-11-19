@@ -17,7 +17,7 @@ public class ArticlesEntity {
     @Column
     String artDate;
     @Column
-    String artHits;
+    int artHits;
     @Column
     String artPw;
 }

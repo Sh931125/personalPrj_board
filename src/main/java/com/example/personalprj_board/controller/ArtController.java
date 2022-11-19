@@ -20,24 +20,26 @@ public class ArtController {
     @Autowired
     CommentsRepo commentsRepo;
 
-//메인 뷰
-    @GetMapping("/")
-    public String root(){
-        return "redirect:/main";
+
+    //메인 뷰
+    @GetMapping(value = {"/", "/main"})
+    public String mainRoot(){
+        return "/articles_main";
     }
+
     //글 작성 뷰
     @GetMapping("/create")
     public String createRoot(){
         return "/articles_create";
     }
-    //메인 뷰 + 게시물 목록
-    @GetMapping("/main")
-    public String mainRoot(Model model){
+
+    //게시물 목록
+    @GetMapping("/selectArtAll")
+    public String listRoot(Model model){
         List<ArticlesEntity> artData = articlesRepo.findAll();
         model.addAttribute("articlesData", artData);
-        return "/articles_main";
+        return "/articles_list";
     }
-
 
     //글 작성 기능
     @PostMapping("/insertArt")
@@ -64,8 +66,15 @@ public class ArtController {
     //글 제목 클릭 시 글 내용 조회
     @PostMapping("/selectArt")
     public String selectRoot(ArticlesEntity articlesEntity, Model model){
+
+        //게시글
         Optional<ArticlesEntity> optional = articlesRepo.findById(articlesEntity.getArtId());
+        //댓글
         List<CommentsEntity> optional2 = commentsRepo.findByArtId(articlesEntity);
+
+        //게시글 조회수 +1 증가
+        optional.get().setArtHits(optional.get().getArtHits() + 1);
+        articlesRepo.save(optional.get());
 
         model.addAttribute("selectArtRes", optional.get());
         model.addAttribute("selectComRes", optional2);
