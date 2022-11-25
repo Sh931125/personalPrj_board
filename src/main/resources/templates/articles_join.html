@@ -1,5 +1,7 @@
 <div>
-    <h1><span th:text="${selectArtRes.artId}"></span><span> 번 째 글입니다.</span><button style="margin-left: 10px" onclick="articlesMain()">글 접기</button></h1>
+    <h1><span id="selectArtId" th:text="${selectArtRes.artId}"></span><span> 번 째 글입니다.</span>
+        <button style="margin-left: 10px" onclick="articlesMain()">글 접기</button>
+        <button id="deleteArtBtn" style="margin-left: 10px" th:value="${selectArtRes.artId}">글 삭제</button></h1>
     <h2>글 제목 : </h2><span th:text="${selectArtRes.artHead}"></span><br>
     <h3>글 내용 : </h3><span th:text="${selectArtRes.artBody}"></span>
 </div>
@@ -7,7 +9,9 @@
     <hr>
     익명
     <span th:text="${selectStat.count}" ></span>
-    &nbsp; : <span th:text="${selectComRes.comBody}"></span><br>
+    &nbsp; : <span th:text="${selectComRes.comBody}"></span> <span th:if="${selectComRes.comDate != null}" th:text="${selectComRes.comDate}"></span>
+    <button id="deleteComBtn" style="margin-left: 10px" th:value="${selectComRes.comId}">삭제</button><br>
+
 </div>
 <hr>
 <span>댓글 작성 : </span><input type="text" id="commentBody" style="width:500px" onkeypress="insertComEnter(event)">

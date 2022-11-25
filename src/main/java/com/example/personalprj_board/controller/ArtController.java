@@ -72,15 +72,37 @@ public class ArtController {
         //댓글
         List<CommentsEntity> optional2 = commentsRepo.findByArtId(articlesEntity);
 
-        //게시글 조회수 +1 증가
-        optional.get().setArtHits(optional.get().getArtHits() + 1);
-        articlesRepo.save(optional.get());
-
         model.addAttribute("selectArtRes", optional.get());
         model.addAttribute("selectComRes", optional2);
         return "/articles_join";
     }
 
+    //조회수 증가 메소드
+    @PostMapping("/plusHits")
+    public String plusHitsRoot(ArticlesEntity articlesEntity) {
+        //게시글
+        Optional<ArticlesEntity> optional = articlesRepo.findById(articlesEntity.getArtId());
 
+        //게시글 조회수 +1 증가
+        optional.get().setArtHits(optional.get().getArtHits() + 1);
+        articlesRepo.save(optional.get());
+
+        return "/articles_main";
+    }
+
+    //게시글 삭제 메소드
+    @PostMapping("/deleteArt")
+    public String deleteArtRoot(ArticlesEntity articlesEntity) {
+        commentsRepo.deleteAllByArtId(articlesEntity);
+        articlesRepo.deleteById(articlesEntity.getArtId());
+        return "/articles_main";
+    }
+
+    //댓글 삭제 메소드
+    @PostMapping("/deleteCom")
+    public String deleteComRoot(CommentsEntity commentsEntity) {
+        commentsRepo.deleteById(commentsEntity.getComId());
+        return "/articles_main";
+    }
 
 }

@@ -21,6 +21,8 @@ public class CommentsEntity {
     @Column
     String comPw;
 
+    @Column
+    String comDate;
 //    public CommentsEntity(ArticlesEntity articlesEntity){
 //        this.artId = articlesEntity;
 //    }

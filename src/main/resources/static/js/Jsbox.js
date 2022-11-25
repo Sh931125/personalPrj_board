@@ -55,11 +55,13 @@ function insertComAjax (e) {
           artId : e,
           comBody : comment,
           comPw : commentPw,
+            comDate : attrResDate,
         },
         success : function (data){
             console.log("성공");
                 //댓글 입력 후 댓글
             selectArtAjax(e);
+
 
         },
         error : function (){
@@ -86,13 +88,25 @@ function selectArtAjax(e){
         success: function (data) {
             //조회수 즉각반영 위해 추가
             selectArtAll();
-            //
+
             $('#firstDiv').empty().append(data);
 
             //댓글 작성 클릭
             $('#insertComBtn').on("click", function () {
                 let thisArtId = $(this).val();
                 insertComAjax(thisArtId);
+            })
+            //댓글삭제 버튼 기능
+            $('#deleteComBtn').on("click", function (){
+              let thisComId = $(this).val();
+              let thisArtId = $('#selectArtId').text();
+              deleteComAjax(thisComId, thisArtId);
+            })
+
+            //글삭제 버튼 기능
+            $('#deleteArtBtn').on("click", function (){
+                let thisArtId = $(this).val();
+                deleteArtAjax(thisArtId);
             })
 
         },
@@ -113,6 +127,7 @@ function selectArtAll () {
             //글제목 클릭 이벤트
             $('.artHead').on("click", function () {
                 let Id = $(this).val();
+                plusHitsAjax(Id);
                 selectArtAjax(Id);
             });
         },
@@ -124,8 +139,58 @@ function selectArtAll () {
 
 }
 
+//조회수 증가 ajax
+function plusHitsAjax (e) {
+    $.ajax({
+        type : "POST",
+        url : "/plusHits",
+        data : {
+            artId: e,
+        },
+        success: function () {
+            console.log("조회수 증가 성공")
+        },
+        error() {
+            console.log("error")
+        }
+    });
+}
+//게시글 삭제 ajax
+function deleteArtAjax(e){
+    $.ajax({
+        type : "POST",
+        url : "/deleteArt",
+        data : {
+            artId: e,
+        },
+        success: function () {
+            console.log("성공");
+            articlesMain();
+        },
+        error() {
+            console.log("error")
+        }
+    });
+}
+//댓글 삭제 ajax
+function deleteComAjax(e, e2){
+    $.ajax({
+        type : "POST",
+        url : "/deleteCom",
+        data : {
+            comId: e,
+        },
+        success: function () {
+            console.log("성공")
+            selectArtAjax(e2);
+        },
+        error() {
+            console.log("error")
+        }
+    });
+}
 
-
+//최초 준비
 $(document).ready(function () {
     selectArtAll();
     //dataTable 생성
